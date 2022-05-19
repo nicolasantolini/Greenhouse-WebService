@@ -3,6 +3,7 @@ using System;
 namespace DatabaseGateway.Model
 {
 
+    
     public class Log
     {
         public int Id { get; set; }
