@@ -1,48 +1,61 @@
-namespace DatabaseGateway.Model;
+using System;
 
-public class Plant
+namespace DatabaseGateway.Model
 {
-    private int Id { get; set; }
-    private string _name, _description, _type, _scientificName;
 
-    private string Name
+    public class Plant
     {
-        get => _name;
-        set => _name = value ?? throw new ArgumentNullException(nameof(value));
-    }
+        public int Id { get; set; }
+        private string _name, _description, _type, _scientificName;
+        private int _idGreenhouse;
 
-    private string Description
-    {
-        get => _description;
-        set => _description = value ?? throw new ArgumentNullException(nameof(value));
-    }
+        public string Name
+        {
+            get => _name;
+            set => _name = value ?? throw new ArgumentNullException(nameof(value));
+        }
 
-    private string Type
-    {
-        get => _type;
-        set => _type = value ?? throw new ArgumentNullException(nameof(value));
-    }
+        public string Description
+        {
+            get => _description;
+            set => _description = value ?? throw new ArgumentNullException(nameof(value));
+        }
 
-    private string ScientificName
-    {
-        get => _scientificName;
-        set => _scientificName = value ?? throw new ArgumentNullException(nameof(value));
-    }
+        public string Type
+        {
+            get => _type;
+            set => _type = value ?? throw new ArgumentNullException(nameof(value));
+        }
 
-    public Plant(int id, string name, string description, string type, string scientificName)
-    {
-        Id = id;
-        _name = name;
-        _description = description;
-        _type = type;
-        _scientificName = scientificName;
-    }
-    
-    public Plant(string name, string description, string type, string scientificName)
-    {
-        _name = name;
-        _description = description;
-        _type = type;
-        _scientificName = scientificName;
+        public string ScientificName
+        {
+            get => _scientificName;
+            set => _scientificName = value ?? throw new ArgumentNullException(nameof(value));
+        }
+
+        public int Id_Greenhouse
+        {
+            get;
+            set;
+        }
+
+        public Plant(int id, string name, string description, string type, string scientificName, int idGreenhouse)
+        {
+            Id = id;
+            _name = name;
+            _description = description;
+            _type = type;
+            _scientificName = scientificName;
+            Id_Greenhouse = idGreenhouse;
+        }
+
+        public Plant(string name, string description, string type, string scientificName, int idGreenhouse)
+        {
+            _name = name;
+            _description = description;
+            _type = type;
+            _scientificName = scientificName;
+            Id_Greenhouse = idGreenhouse;
+        }
     }
 }

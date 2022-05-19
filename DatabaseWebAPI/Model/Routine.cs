@@ -1,19 +1,29 @@
-namespace DatabaseGateway.Model;
+﻿using System;
 
-public class Routine
+namespace DatabaseGateway.Model
 {
-    public int Id { get; set; }
-    public string Name { get; set; }
-    public string Day{ get; set; }  
-    public string Frequency{ get; set; }
-    public int PlantId { get; set; }
 
-    public Routine(int id, string name, string day, string frequency, int plantId)
+    public class Routine
     {
-        Id = id;
-        Name = name;
-        Day = day;
-        Frequency = frequency;
-        PlantId = plantId;
+        public int Id { get; set; }
+        public string Day { get; set; }
+        public string Task { get; set; }
+        public int Id_Plant { get; set; }
+
+        public Routine(int id, string day, string task, int id_plant)
+        {
+            Id = id;
+            Day = day;
+            Task = task;
+            Id_Plant = id_plant;
+        }
+        
+        public Routine()
+        {
+            Id = -1;
+            Day = "noDay";
+            Task = "noTask";
+            Id_Plant = -1;
+        }
     }
 }
