@@ -32,6 +32,10 @@ namespace DatabaseWebAPI
 
             });
             services.AddSingleton<IDataManager, DatabaseDataRetriever>();
+            services.AddSwaggerGen(c =>
+            {
+                c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
+            });
             
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme,

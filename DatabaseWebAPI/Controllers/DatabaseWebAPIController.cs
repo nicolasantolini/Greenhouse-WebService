@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using DatabaseGateway.DatabaseDataHandler;
 using DatabaseGateway.Model;
 using Microsoft.AspNetCore.Authorization;
@@ -9,13 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 namespace DatabaseWebAPI.Controllers
 {
 
-    [Authorize]
     [ApiController]
-    public class DatabaseWebAPI : ControllerBase
+    public class DatabaseWebAPIController : ControllerBase
     {
         private readonly IDataManager _iDataManager;
 
-        public DatabaseWebAPI([FromServices] IDataManager dataManager)
+        public DatabaseWebAPIController([FromServices] IDataManager dataManager)
         {
             _iDataManager = dataManager;
         }
