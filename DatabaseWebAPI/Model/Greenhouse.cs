@@ -27,25 +27,25 @@ public class Greenhouse
         set => _location = value ?? throw new ArgumentNullException(nameof(value));
     }
 
-    public float Area { get; set; }
+    public double Area { get; set; }
 
-    public float Co2Preferred { get; set; }
+    public double Co2Preferred { get; set; }
 
-    public float TemperaturePreferred { get; set; }
+    public double TemperaturePreferred { get; set; }
 
-    public float HumidityPreferred { get; set; }
+    public double HumidityPreferred { get; set; }
 
     private string _name;
     private string _description;
     private string _location;
     
-    public ushort ActuatorSet { get; set; }
+    public int ActuatorSet { get; set; }
 
     public List<Log> Logs;
     public List<Plant> Plants;
 
-    public Greenhouse(int id, string name, string description, string location, float area,ushort actuatorSet, float co2Preferred,
-        float temperaturePreferred, float humidityPreferred)
+    public Greenhouse(int id, string name, string description, string location, double area,int actuatorSet, double co2Preferred,
+        double temperaturePreferred, double humidityPreferred)
     {
         Id = id;
         _name = name;
@@ -59,8 +59,8 @@ public class Greenhouse
         Logs = new List<Log>();
         Plants = new List<Plant>();
     }
-    public Greenhouse(string name, string description, string location, float area, float co2Preferred,
-        float temperaturePreferred, float humidityPreferred)
+    public Greenhouse(string name, string description, string location, double area, double co2Preferred,
+        double temperaturePreferred, double humidityPreferred)
     {
         _name = name;
         _description = description;
