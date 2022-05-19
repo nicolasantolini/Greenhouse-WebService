@@ -119,6 +119,11 @@ public class DatabaseDataRetriever : IDataManager
         throw new NotImplementedException();
     }
 
+    public Task<List<Routine>> GetAllRoutines(int plantId)
+    {
+        throw new NotImplementedException();
+    }
+
     public Task<bool> SetActuatorTrue(int greenhouseId)
     {
         throw new NotImplementedException();

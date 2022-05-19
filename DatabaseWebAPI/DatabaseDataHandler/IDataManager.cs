@@ -16,6 +16,9 @@ public interface IDataManager
     Task<List<Log>> GetAllLogs(int greenhouseId);
     Task<Log> GetLastLog(int greenhouseId);
     Task<Log> GetLog(int logId);
+
+    Task<List<Routine>> GetAllRoutines(int plantId);
+    
     Task<bool> SetActuatorTrue(int greenhouseId);
 
 }

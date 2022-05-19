@@ -83,7 +83,7 @@ public class DatabaseWebAPI : ControllerBase
     }
     
     [HttpDelete]
-    [Route("{greenhouseId}")]
+    [Route("Greenhouse/{greenhouseId}")]
     public async Task RemoveGreenhouse([FromRoute] int greenhouseId)
     {
         try
@@ -210,6 +210,25 @@ public class DatabaseWebAPI : ControllerBase
             return StatusCode(500,e.Message);
         }
     }
+
+    [HttpGet]
+    [Route("Routine/{plantId}")]
+    public async Task<ActionResult<List<Routine>>> GetAllRoutines([FromRoute] int plantId)
+    {
+        try
+        {
+            {
+                List<Routine> routines = _iDataManager.GetAllRoutines(plantId).Result;
+                return Ok(routines);
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return StatusCode(500,e.Message);
+        }
+    }
+
     [HttpGet]
     [Route("Actuator")]
     public async Task<ActionResult<bool>> SetActuatorTrue([FromRoute] int greenhouseId)
