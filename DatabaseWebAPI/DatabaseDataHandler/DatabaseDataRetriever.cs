@@ -78,6 +78,7 @@ namespace DatabaseWebAPI.DatabaseDataHandler
                         (string) reader[3], Decimal.ToDouble((decimal) reader[4])
                         , (bool) reader[8], Decimal.ToDouble((decimal) reader[6]),
                         Decimal.ToDouble((decimal) reader[7]), Decimal.ToDouble((decimal) reader[5]));
+                    Console.WriteLine(newGreenhouse.Name);
                     newGreenhouse.Logs = GetAllLogs(newGreenhouse.Id).Result;
                     newGreenhouse.Plants = GetPlants(newGreenhouse.Id).Result;
                 }

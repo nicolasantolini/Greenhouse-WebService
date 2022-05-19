@@ -37,13 +37,15 @@ namespace DatabaseWebAPI.Controllers
             }
         }
 
-        [HttpGet("GreenhouseById/{greenhouseId}")]
-        public async Task<ActionResult<Greenhouse>> GetGreenhouse(int greenhouseId)
+        [HttpGet]
+        [Route("GreenhouseById/{greenhouseId}")]
+        public async Task<ActionResult<Greenhouse>> GetGreenhouse([FromRoute] int greenhouseId)
         {
             try
             {
                 {
                     Greenhouse greenhouse = _iDataManager.GetGreenhouse(greenhouseId).Result;
+                    if (greenhouse.Name.Equals(null)) return NotFound();
                     return Ok(greenhouse);
                 }
             }
