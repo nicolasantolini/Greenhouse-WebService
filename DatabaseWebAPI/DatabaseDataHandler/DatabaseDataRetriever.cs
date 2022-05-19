@@ -1,7 +1,9 @@
 using System.Data.SqlClient;
+using DatabaseGateway.DatabaseDataHandler;
 using DatabaseGateway.Model;
+using Microsoft.AspNetCore.Mvc;
 
-namespace DatabaseGateway.DatabaseDataHandler;
+namespace DatabaseWebAPI.DatabaseDataHandler;
 
 public class DatabaseDataRetriever : IDataManager
 {
@@ -15,7 +17,7 @@ public class DatabaseDataRetriever : IDataManager
         }
     }
     
-    public List<Greenhouse> GetGreenhouses(string userEmail)
+    public async Task<List<Greenhouse>> GetGreenhouses(string userEmail)
     {
         List<Greenhouse> greenhouses = new List<Greenhouse>();
         // Create the command  
@@ -28,15 +30,15 @@ public class DatabaseDataRetriever : IDataManager
         {
             Greenhouse newGreenhouse = new Greenhouse( (int) reader[0], (string) reader[1], (string) reader[2], (string) reader[3], (float) reader[4]
                 ,(ushort) reader[5],(float) reader[6], (float) reader[7],(float) reader[8]);
-            newGreenhouse.Logs=GetAllLogs(newGreenhouse.Id);
-            newGreenhouse.Plants = GetPlants(newGreenhouse.Id);
+            newGreenhouse.Logs=GetAllLogs(newGreenhouse.Id).Result;
+            newGreenhouse.Plants = GetPlants(newGreenhouse.Id).Result;
             greenhouses.Add(newGreenhouse);
         }
 
         return greenhouses;
     }
 
-    public Greenhouse GetGreenhouse(int greenhouseId)
+    public async Task<Greenhouse> GetGreenhouse(int greenhouseId)
     {
         Greenhouse newGreenhouse = new Greenhouse();
         // Create the command  
@@ -49,19 +51,19 @@ public class DatabaseDataRetriever : IDataManager
         {
             newGreenhouse = new Greenhouse( (int) reader[0], (string) reader[1], (string) reader[2], (string) reader[3], (float) reader[4]
                 ,(ushort) reader[5],(float) reader[6], (float) reader[7],(float) reader[8]);
-            newGreenhouse.Logs=GetAllLogs(newGreenhouse.Id);
-            newGreenhouse.Plants = GetPlants(newGreenhouse.Id);
+            newGreenhouse.Logs=GetAllLogs(newGreenhouse.Id).Result;
+            newGreenhouse.Plants = GetPlants(newGreenhouse.Id).Result;
         }
 
         return newGreenhouse;
     }
 
-    public void UpdateGreenhouse(Greenhouse greenhouse)
+    public Task UpdateGreenhouse(Greenhouse greenhouse)
     {
-        throw new NotImplementedException();
+        return Task.CompletedTask;
     }
 
-    public void CreateGreenhouse(Greenhouse greenhouse)
+    public Task CreateGreenhouse(Greenhouse greenhouse)
     {
         // Create the command, to insert the data into the Table!  
         // this is a simple INSERT INTO command!  
@@ -74,49 +76,50 @@ public class DatabaseDataRetriever : IDataManager
         insertCommand.Parameters.Add(new SqlParameter("3", false)); 
         
         Console.WriteLine("Commands executed! Total rows affected are " + insertCommand.ExecuteNonQuery());
+        return Task.CompletedTask;
     }
 
-    public void RemoveGreenhouse(int greenhouseId)
+    public Task RemoveGreenhouse(int greenhouseId)
+    {
+        return Task.CompletedTask;
+    }
+
+    public Task<List<Plant>> GetPlants(int greenhouseId)
     {
         throw new NotImplementedException();
     }
 
-    public List<Plant> GetPlants(int greenhouseId)
+    public Task UpdatePlant(Plant plant)
     {
         throw new NotImplementedException();
     }
 
-    public void UpdatePlant(Plant plant)
+    public Task RemovePlant(int plantId)
     {
         throw new NotImplementedException();
     }
 
-    public void RemovePlant(int plantId)
+    public Task CreatePlant(Plant plant)
     {
         throw new NotImplementedException();
     }
 
-    public void CreatePlant(Plant plant)
+    public Task<List<Log>> GetAllLogs(int greenhouseId)
     {
         throw new NotImplementedException();
     }
 
-    public List<Log> GetAllLogs(int greenhouseId)
+    public Task<Log> GetLastLog(int greenhouseId)
     {
         throw new NotImplementedException();
     }
 
-    public Log GetLastLog(int greenhouseId)
+    public Task<Log> GetLog(int logId)
     {
         throw new NotImplementedException();
     }
 
-    public Log GetLog(int logId)
-    {
-        throw new NotImplementedException();
-    }
-
-    public bool SetActuatorTrue(int greenhouseId)
+    public Task<bool> SetActuatorTrue(int greenhouseId)
     {
         throw new NotImplementedException();
     }

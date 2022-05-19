@@ -1,13 +1,8 @@
-using System.Linq;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+using DatabaseGateway.DatabaseDataHandler;
+using DatabaseWebAPI.DatabaseDataHandler;
 using Microsoft.OpenApi.Models;
-using WebApplication.Data;
 
-namespace WebApplication
+namespace DatabaseWebAPI
 {
     public class Startup
     {
@@ -28,8 +23,7 @@ namespace WebApplication
                 c.ResolveConflictingActions (apiDescriptions => apiDescriptions.First ());
 
             });
-            services.AddScoped<IUserService, ValidatorLogInHttp>();
-            services.AddSingleton<IData, HttpDataRetriever>();
+            services.AddSingleton<IDataManager, DatabaseDataRetriever>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
