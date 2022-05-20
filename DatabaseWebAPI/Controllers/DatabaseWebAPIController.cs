@@ -238,8 +238,8 @@ namespace DatabaseWebAPI.Controllers
             }
         }
 
-        [HttpGet]
-        [Route("Actuator")]
+        [HttpPost]
+        [Route("Actuator/{greenhouseId}")]
         public async Task<ActionResult<bool>> SetActuatorTrue([FromRoute] int greenhouseId)
         {
             try
