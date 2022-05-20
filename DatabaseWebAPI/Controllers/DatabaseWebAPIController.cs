@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using DatabaseGateway.DatabaseDataHandler;
 using DatabaseGateway.Model;
 using Microsoft.AspNetCore.Authorization;
@@ -41,7 +44,7 @@ namespace DatabaseWebAPI.Controllers
             {
                 {
                     Greenhouse greenhouse = _iDataManager.GetGreenhouse(greenhouseId).Result;
-                    if (greenhouse.Name.Equals(null)) return NotFound();
+                    if (greenhouse.Name.Equals("")) return NotFound();
                     return Ok(greenhouse);
                 }
             }
@@ -108,6 +111,7 @@ namespace DatabaseWebAPI.Controllers
             {
                 {
                     List<Plant> plants = _iDataManager.GetPlants(greenhouseId).Result;
+                    if (plants[0].Name.Equals("")) return NotFound();
                     return Ok(plants);
                 }
             }
