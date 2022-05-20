@@ -111,7 +111,6 @@ namespace DatabaseWebAPI.Controllers
             {
                 {
                     List<Plant> plants = _iDataManager.GetPlants(greenhouseId).Result;
-                    if (plants[0].Name.Equals("")) return NotFound();
                     return Ok(plants);
                 }
             }
@@ -196,6 +195,7 @@ namespace DatabaseWebAPI.Controllers
             {
                 {
                     Log log = _iDataManager.GetLastLog(greenhouseId).Result;
+                    if (log.Id == -1) return NotFound();
                     return Ok(log);
                 }
             }
@@ -214,6 +214,7 @@ namespace DatabaseWebAPI.Controllers
             {
                 {
                     Log log = _iDataManager.GetLog(logId).Result;
+                    if (log.Id == -1) return NotFound();
                     return Ok(log);
                 }
             }
@@ -232,6 +233,7 @@ namespace DatabaseWebAPI.Controllers
             {
                 {
                     List<Routine> routines = _iDataManager.GetAllRoutinesOfPlant(plantId).Result;
+                    if (routines[0].Id == -1) return NotFound();
                     return Ok(routines);
                 }
             }
