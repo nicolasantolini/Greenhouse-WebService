@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DatabaseGateway.DatabaseDataHandler;
 using DatabaseGateway.Model;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Win32.SafeHandles;
 
 namespace DatabaseWebAPI.DatabaseDataHandler
 {
@@ -14,8 +15,8 @@ namespace DatabaseWebAPI.DatabaseDataHandler
     {
         private SqlConnection _connection;
 
-        private String server_name = "DESKTOP-BLBMG6S";
-        private String database_name = "GreenhouseDB";
+        private String server_name = "database-1.cf0m6bhmfrsf.eu-west-1.rds.amazonaws.com";
+        private String database_name = "GreenHouse";
         private readonly String connectionString;
 
         public DatabaseDataRetriever()
@@ -24,7 +25,8 @@ namespace DatabaseWebAPI.DatabaseDataHandler
             {
                 DataSource = server_name,
                 InitialCatalog = database_name,
-                IntegratedSecurity = true
+                UserID = "admin",
+                Password = "rootroot1234"
             }.ConnectionString;
             Console.WriteLine(connectionString);
         }
@@ -46,8 +48,8 @@ namespace DatabaseWebAPI.DatabaseDataHandler
                 while (reader.Read())
                 {
                     Greenhouse newGreenhouse = new Greenhouse((int) reader[0], (string) reader[1], (string) reader[2],
-                        (string) reader[3], (double) reader[4]
-                        , (bool) reader[8], (double) reader[6], (double) reader[7], (double) reader[5]);
+                        (string) reader[3], Decimal.ToDouble((decimal) reader[4])
+                        , (bool) reader[8], Decimal.ToDouble((decimal) reader[6]), Decimal.ToDouble((decimal) reader[7]),Decimal.ToDouble((decimal) reader[5]));
                     //switched reader 8 and 5 because greenhouse constructor has different order of arguments compared to db table
                     newGreenhouse.Logs = GetAllLogs(newGreenhouse.Id).Result;
                     newGreenhouse.Plants = GetPlants(newGreenhouse.Id).Result;
@@ -78,7 +80,6 @@ namespace DatabaseWebAPI.DatabaseDataHandler
                         (string) reader[3], Decimal.ToDouble((decimal) reader[4])
                         , (bool) reader[8], Decimal.ToDouble((decimal) reader[6]),
                         Decimal.ToDouble((decimal) reader[7]), Decimal.ToDouble((decimal) reader[5]));
-                    Console.WriteLine(newGreenhouse.Name);
                     newGreenhouse.Logs = GetAllLogs(newGreenhouse.Id).Result;
                     newGreenhouse.Plants = GetPlants(newGreenhouse.Id).Result;
                 }
@@ -133,7 +134,7 @@ namespace DatabaseWebAPI.DatabaseDataHandler
                     queryInsertGreenhouse.Parameters.Add("@4", SqlDbType.Decimal).Value = greenhouse.Co2Preferred;
                     queryInsertGreenhouse.Parameters.Add("@5", SqlDbType.Decimal).Value = greenhouse.TemperaturePreferred;
                     queryInsertGreenhouse.Parameters.Add("@6", SqlDbType.Decimal).Value = greenhouse.HumidityPreferred;
-                    queryInsertGreenhouse.Parameters.Add("@7", SqlDbType.Bit).Value = greenhouse.ActuatorSet;
+                    queryInsertGreenhouse.Parameters.Add("@7", SqlDbType.Bit).Value = false;
                     queryInsertGreenhouse.Parameters.Add("@8", SqlDbType.VarChar, 50).Value = "test@test.com";
 
                     queryInsertGreenhouse.ExecuteNonQuery();
