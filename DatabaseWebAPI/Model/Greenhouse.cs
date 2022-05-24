@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 
 namespace DatabaseGateway.Model
-{
-
+{ 
+    [Serializable]
     public class Greenhouse
     {
 

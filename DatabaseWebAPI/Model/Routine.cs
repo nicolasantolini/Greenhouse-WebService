@@ -2,7 +2,7 @@
 
 namespace DatabaseGateway.Model
 {
-
+    [Serializable]
     public class Routine
     {
         public int Id { get; set; }

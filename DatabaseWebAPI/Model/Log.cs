@@ -1,9 +1,8 @@
 using System;
 
 namespace DatabaseGateway.Model
-{
-
-    
+{ 
+    [Serializable]
     public class Log
     {
         public int Id { get; set; }
