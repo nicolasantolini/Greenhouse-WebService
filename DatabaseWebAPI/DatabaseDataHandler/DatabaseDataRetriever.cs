@@ -49,7 +49,7 @@ namespace DatabaseWebAPI.DatabaseDataHandler
                 {
                     Greenhouse newGreenhouse = new Greenhouse((int) reader[0], (string) reader[1], (string) reader[2],
                         (string) reader[3], Decimal.ToDouble((decimal) reader[4])
-                        , (bool) reader[8], Decimal.ToDouble((decimal) reader[6]), Decimal.ToDouble((decimal) reader[7]),Decimal.ToDouble((decimal) reader[5]));
+                        , (bool) reader[8], Decimal.ToDouble((decimal) reader[6]), Decimal.ToDouble((decimal) reader[7]),Decimal.ToDouble((decimal) reader[5]),(string) reader[9]);
                     //switched reader 8 and 5 because greenhouse constructor has different order of arguments compared to db table
                     newGreenhouse.Logs = GetAllLogs(newGreenhouse.Id).Result;
                     newGreenhouse.Plants = GetPlants(newGreenhouse.Id).Result;
@@ -79,7 +79,7 @@ namespace DatabaseWebAPI.DatabaseDataHandler
                     newGreenhouse = new Greenhouse((int) reader[0], (string) reader[1], (string) reader[2],
                         (string) reader[3], Decimal.ToDouble((decimal) reader[4])
                         , (bool) reader[8], Decimal.ToDouble((decimal) reader[6]),
-                        Decimal.ToDouble((decimal) reader[7]), Decimal.ToDouble((decimal) reader[5]));
+                        Decimal.ToDouble((decimal) reader[7]), Decimal.ToDouble((decimal) reader[5]),(string) reader[9]);
                     newGreenhouse.Logs = GetAllLogs(newGreenhouse.Id).Result;
                     newGreenhouse.Plants = GetPlants(newGreenhouse.Id).Result;
                 }

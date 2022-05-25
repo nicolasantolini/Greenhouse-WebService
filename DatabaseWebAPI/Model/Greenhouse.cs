@@ -38,13 +38,18 @@ namespace DatabaseGateway.Model
         public double TemperaturePreferred { get; set; }
 
         public double HumidityPreferred { get; set; }
+        public string UserEmail
+        {
+            get => userEmail;
+            set => userEmail = value ?? throw new ArgumentNullException(nameof(value));
+        }
 
 
         private int _id;
         private string _name;
         private string _description;
         private string _location;
-        private string _owner;
+        private string userEmail;
 
         public bool ActuatorSet { get; set; }
 
@@ -53,7 +58,7 @@ namespace DatabaseGateway.Model
 
         public Greenhouse(int id, string name, string description, string location, double area, bool actuatorSet,
             double co2Preferred,
-            double temperaturePreferred, double humidityPreferred)
+            double temperaturePreferred, double humidityPreferred,string userEmail)
         {
             _id = id;
             _name = name;
@@ -64,12 +69,13 @@ namespace DatabaseGateway.Model
             HumidityPreferred = humidityPreferred;
             Area = area;
             ActuatorSet = actuatorSet;
+            UserEmail = userEmail;
             Logs = new List<Log>();
             Plants = new List<Plant>();
         }
 
         public Greenhouse(string name, string description, string location, double area, double co2Preferred,
-            double temperaturePreferred, double humidityPreferred)
+            double temperaturePreferred, double humidityPreferred,string userEmail)
         {
             _id = -1;
             _name = name;
@@ -78,6 +84,7 @@ namespace DatabaseGateway.Model
             Co2Preferred = co2Preferred;
             TemperaturePreferred = temperaturePreferred;
             HumidityPreferred = humidityPreferred;
+            UserEmail = userEmail;
             Area = area;
             ActuatorSet = false;
             Logs = new List<Log>();
