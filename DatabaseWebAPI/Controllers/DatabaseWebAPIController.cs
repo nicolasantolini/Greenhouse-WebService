@@ -111,7 +111,7 @@ namespace DatabaseWebAPI.Controllers
             {
                 {
                     List<Plant> plants = _iDataManager.GetPlants(greenhouseId).Result;
-                    return Ok(plants);
+                        return Ok(plants);
                 }
             }
             catch (Exception e)

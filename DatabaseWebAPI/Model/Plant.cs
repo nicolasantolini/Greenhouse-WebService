@@ -51,6 +51,7 @@ namespace DatabaseGateway.Model
 
         public Plant(string name, string description, string type, string scientificName, int idGreenhouse)
         {
+            Id = -1;
             _name = name;
             _description = description;
             _type = type;
@@ -60,6 +61,7 @@ namespace DatabaseGateway.Model
 
         public Plant()
         {
+            Id = -1;
             _name = "";
             _description = "";
             _type = "";
