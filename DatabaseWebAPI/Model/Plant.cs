@@ -2,7 +2,7 @@ using System;
 
 namespace DatabaseGateway.Model
 {
-
+[Serializable]
     public class Plant
     {
         public int Id { get; set; }
@@ -56,6 +56,15 @@ namespace DatabaseGateway.Model
             _type = type;
             _scientificName = scientificName;
             Id_Greenhouse = idGreenhouse;
+        }
+
+        public Plant()
+        {
+            _name = "";
+            _description = "";
+            _type = "";
+            _scientificName = "";
+            Id_Greenhouse = -1;
         }
     }
 }
