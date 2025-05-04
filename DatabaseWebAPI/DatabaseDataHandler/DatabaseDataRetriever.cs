@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -26,7 +27,7 @@ namespace DatabaseWebAPI.DatabaseDataHandler
                 DataSource = server_name,
                 InitialCatalog = database_name,
                 UserID = "admin",
-                Password = "rootroot1234"
+                Password = Environment.GetEnvironmentVariable("dbPassword")
             }.ConnectionString;
             Console.WriteLine(connectionString);
         }
